@@ -1,0 +1,44 @@
+name: latency-hunter
+
+topology:
+  nodes:
+    # Switch Arista cEOS
+    spine-01:
+      kind: ceos
+      image: ceos:lab
+      mgmt-ipv4: 172.20.20.10
+      ports:
+        - 6030:6030  # gNMI/gRPC
+        - 8080:80
+      env:
+        INTFTYPE: eth
+      startup-config: ../configs/switch/arista-ceos.cfg
+
+    # Traffic Generator 1
+    traffic-gen-1:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.21
+      exec:
+        - apk add --no-cache iperf3 bash tcpdump
+        - ip addr add 10.0.1.11/24 dev eth1
+        - ip link set eth1 up
+
+    # Traffic Generator 2
+    traffic-gen-2:
+      kind: linux
+      image: alpine:latest
+      mgmt-ipv4: 172.20.20.22
+      exec:
+        - apk add --no-cache iperf3 bash tcpdump
+        - ip addr add 10.0.1.12/24 dev eth1
+        - ip link set eth1 up
+        - iperf3 -s -D
+
+  links:
+    - endpoints: ["traffic-gen-1:eth1", "spine-01:eth1"]
+    - endpoints: ["traffic-gen-2:eth1", "spine-01:eth2"]
+
+mgmt:
+  network: latency-hunter-mgmt
+  ipv4-subnet: 172.20.20.0/24

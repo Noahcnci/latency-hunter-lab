@@ -1,0 +1,167 @@
+{
+  "name": "latency-hunter",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "latency-hunter-mgmt",
+        "bridge": "br-3ff6075bc3ac",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-gw": "fe80::f05a:6bff:fe22:db01",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": [],
+  "nodes": {
+    "spine-01": {
+      "index": "0",
+      "shortname": "spine-01",
+      "longname": "clab-latency-hunter-spine-01",
+      "fqdn": "spine-01.latency-hunter.io",
+      "group": "",
+      "labdir": "/home/noah/latency-hunter-gnmi/topology/clab-latency-hunter/spine-01",
+      "kind": "ceos",
+      "image": "ceos:lab",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "00:1c:73:59:07:cf",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-3ff6075bc3ac",
+        "clab-node-group": "",
+        "clab-node-kind": "ceos",
+        "clab-node-lab-dir": "/home/noah/latency-hunter-gnmi/topology/clab-latency-hunter/spine-01",
+        "clab-node-longname": "clab-latency-hunter-spine-01",
+        "clab-node-name": "spine-01",
+        "clab-node-type": "",
+        "clab-owner": "noah",
+        "clab-topo-file": "/home/noah/latency-hunter-gnmi/topology/latency-hunter.clab.yml",
+        "containerlab": "latency-hunter"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 6030,
+          "port": 6030,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "::",
+          "host-port": 6030,
+          "port": 6030,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "0.0.0.0",
+          "host-port": 8080,
+          "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "::",
+          "host-port": 8080,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "traffic-gen-1": {
+      "index": "1",
+      "shortname": "traffic-gen-1",
+      "longname": "clab-latency-hunter-traffic-gen-1",
+      "fqdn": "traffic-gen-1.latency-hunter.io",
+      "group": "",
+      "labdir": "/home/noah/latency-hunter-gnmi/topology/clab-latency-hunter/traffic-gen-1",
+      "kind": "linux",
+      "image": "alpine:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.21",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-3ff6075bc3ac",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/noah/latency-hunter-gnmi/topology/clab-latency-hunter/traffic-gen-1",
+        "clab-node-longname": "clab-latency-hunter-traffic-gen-1",
+        "clab-node-name": "traffic-gen-1",
+        "clab-node-type": "",
+        "clab-owner": "noah",
+        "clab-topo-file": "/home/noah/latency-hunter-gnmi/topology/latency-hunter.clab.yml",
+        "containerlab": "latency-hunter"
+      },
+      "port-bindings": [
+      ]
+    },
+    "traffic-gen-2": {
+      "index": "2",
+      "shortname": "traffic-gen-2",
+      "longname": "clab-latency-hunter-traffic-gen-2",
+      "fqdn": "traffic-gen-2.latency-hunter.io",
+      "group": "",
+      "labdir": "/home/noah/latency-hunter-gnmi/topology/clab-latency-hunter/traffic-gen-2",
+      "kind": "linux",
+      "image": "alpine:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.22",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-3ff6075bc3ac",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/noah/latency-hunter-gnmi/topology/clab-latency-hunter/traffic-gen-2",
+        "clab-node-longname": "clab-latency-hunter-traffic-gen-2",
+        "clab-node-name": "traffic-gen-2",
+        "clab-node-type": "",
+        "clab-owner": "noah",
+        "clab-topo-file": "/home/noah/latency-hunter-gnmi/topology/latency-hunter.clab.yml",
+        "containerlab": "latency-hunter"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "traffic-gen-1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:e9:41:33",
+        "peer": "z"
+      },
+      "z": {
+        "node": "spine-01",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:ea:46:ea",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "traffic-gen-2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:03:55:61",
+        "peer": "z"
+      },
+      "z": {
+        "node": "spine-01",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:b0:92:69",
+        "peer": "a"
+      }
+    }
+  ]
+}

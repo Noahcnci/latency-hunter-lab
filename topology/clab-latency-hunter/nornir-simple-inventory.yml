@@ -1,0 +1,16 @@
+---
+spine-01:
+    username: admin
+    password: admin
+    platform: ceos
+    hostname: 172.20.20.10
+traffic-gen-1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.21
+traffic-gen-2:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.22

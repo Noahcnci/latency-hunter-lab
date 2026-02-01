@@ -1,0 +1,45 @@
+! The checkpoint file saved at Sun Feb  1 20:59:13 2026 by root
+! device: spine-01 (cEOSLab, EOS-4.30.0F-31408544.4300F (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$ViIXc/sV1zt09Gpt$s7qd8ZOvz3/bqM98d3w9g8KT8O3Ew16xAiZAVL3mYwe9dFxBYIB/igKvulKM66IAvOS.ClGFvhD/qZh02N4F/1
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname spine-01
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+management api http-commands
+   protocol http
+   no shutdown
+!
+management api gnmi
+   transport grpc default
+   provider eos-native
+!
+management api models
+   provider macsec
+   !
+   provider smash
+      path openconfig/interfaces
+!
+interface Ethernet1
+   description Traffic-Gen-1
+!
+interface Ethernet2
+   description Traffic-Gen-2
+!
+interface Management0
+   ip address 172.20.20.10/24
+!
+ip routing
+!
+end
