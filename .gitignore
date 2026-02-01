@@ -1,0 +1,41 @@
+# Containerlab
+clab-*/
+.clab/
+*.log
+*.pcap
+
+# Grafana & InfluxDB Data
+data/
+grafana-data/
+influxdb-data/
+*.db
+*.wal
+
+# IDE & Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.tar
+*.tar.gz
+*.zip
+
+# Environment
+.env
+.env.local
